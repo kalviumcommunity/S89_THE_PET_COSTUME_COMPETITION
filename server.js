@@ -6,7 +6,7 @@ app.get("/ping",(req,res)=>{
     try {
         res.status(200).send({msg:"pong"})
     } catch (error) {
-        res.status(500).send({msg:"Server occured",error});
+        res.status(500).send({msg:"Error occured",error});
     }
 })
 
