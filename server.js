@@ -18,10 +18,11 @@ app.get("/ping", (req, res) => {
 app.listen(3000, async(err) => {
     try {
         await mongoose.connect(process.env.MONGO_URL);
-
-        console.error("Failed to start the server. Error:", err.message);
-    } catch (error) {
         console.log("Server connected successfully on port 3000");
+
+        
+    } catch (error) {
+        console.error("Failed to start the server. Error:", err.message);
     }
     
 });
