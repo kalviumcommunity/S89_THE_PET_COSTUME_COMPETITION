@@ -1,6 +1,8 @@
 const express = require("express");
 
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const app = express();
 
@@ -15,7 +17,7 @@ app.get("/ping", (req, res) => {
 
 app.listen(3000, async(err) => {
     try {
-        await mongoose.connect("mongodb+srv://rekhansikagoluguri07:radh%40krishna_123@cluster0.91xlh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+        await mongoose.connect(process.env.MONGO_URL);
 
         console.error("Failed to start the server. Error:", err.message);
     } catch (error) {
