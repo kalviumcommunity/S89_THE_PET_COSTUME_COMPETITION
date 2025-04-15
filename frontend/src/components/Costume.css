@@ -1,0 +1,15 @@
+.costumecard > img{
+    width: 80%;
+    height: 10%;
+}
+
+.costumecard{
+    background-color:dimgrey;
+    border-radius: 3%;
+    color: black;
+}
+
+.costumecard > p{
+    display: flex;
+    justify-content: center;
+}
