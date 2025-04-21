@@ -4,7 +4,12 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 
+
+
 const app = express();
+
+const cors = require("cors")
+app.use(cors());
 
 const costumeRouter = require("./router");
 app.use('/costume',costumeRouter);

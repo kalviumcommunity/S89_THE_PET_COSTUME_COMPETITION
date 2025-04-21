@@ -44,5 +44,5 @@ const user = mongoose.Schema({
 
 })
 
-const pet = mongoose.model("rekha",user);
+const pet = mongoose.model("list_of_costumes",user);
 module.exports = pet;
