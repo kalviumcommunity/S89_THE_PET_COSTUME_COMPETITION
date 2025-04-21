@@ -1,5 +1,6 @@
 import React from "react";
-import "./Costume.css"
+import "./Costume.css";
+
 
 const Costume = () => {
   const petCostumeEntries = [
@@ -78,6 +79,7 @@ const Costume = () => {
           <hr />
         </div>
       ))}
+      
     </div>
   );
 };
