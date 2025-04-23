@@ -19,6 +19,13 @@ const Navbar = () => {
 
     </div>
 
+    <div onClick={()=>{
+        navigate("/addcostume")
+    }}>
+        <button style={{background:"black",color:"white"}}>Add Costume</button>
+
+    </div>
+
     </div>
    
 

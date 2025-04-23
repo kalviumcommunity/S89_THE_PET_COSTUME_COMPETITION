@@ -11,7 +11,7 @@ router.post('/pets',async(req,res)=>{
         if(!pet_name || !owner_name || !costume || !category || !age || !species || !breed || !prize){
             res.status(400).send({msg:"All fields are required"});
         }
-        const exist = pet.findOne({pet_name,owner_name,costume,category,age,species,breed,prize});
+        const exist = await pet.findOne({pet_name,owner_name,costume,category,age,species,breed,prize});
         if(exist){
             res.status(400).send({msg:"User already exists"});
         }
