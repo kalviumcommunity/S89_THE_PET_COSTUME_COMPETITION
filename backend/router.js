@@ -28,14 +28,14 @@ router.get('/pets',async(req,res)=>{
     try {
         const pets = await pet.find();
         
-        res.status(200).send({msg:"Pet-Data retrieved successfully",pets});
+        return res.status(200).send({msg:"Pet-Data retrieved successfully",pets});
     } catch (error) {
         res.status(500).send({msg:"Something went wrong",error});
         console.log(error);
     }
 })
 
-router.put('/pets/update/:id', async (req, res) => {
+router.put('/pets/:id', async (req, res) => {
     try {
         const { pet_name, owner_name, costume, category, age, species, breed, prize } = req.body;
         if (!pet_name || !owner_name || !costume || !category || !age || !species || !breed || !prize) {
@@ -56,7 +56,7 @@ router.put('/pets/update/:id', async (req, res) => {
     }
 });
 
-router.delete('/pets/delete/:id', async (req, res) => {
+router.delete('/pets/:id', async (req, res) => {
     try {
         const deletedPet = await pet.findByIdAndDelete(req.params.id);
 
