@@ -34,7 +34,7 @@ const FormPage = ({ selectedEntity, setSelectedEntity, refreshEntities }) => {
         alert("Data submitted successfully!");
       }
       setSelectedEntity(null);
-      refreshEntities(); // Refresh the list after update
+      refreshEntities(); 
     } catch (error) {
       console.error("Error submitting form data:", error);
     }
