@@ -7,15 +7,15 @@ router.use(express.json());
 
 router.post('/pets',async(req,res)=>{
     try {
-        const {pet_name,owner_name,costume,category,age,species,breed,prize} = req.body;
-        if(!pet_name || !owner_name || !costume || !category || !age || !species || !breed || !prize){
+        const {userId,pet_name,owner_name,costume,category,age,species,breed,prize} = req.body;
+        if(!userId || !pet_name || !owner_name || !costume || !category || !age || !species || !breed || !prize){
             return res.status(400).send({msg:"Please fill all details to post Pet-Data"});
         }
-        const exist = await pet.findOne({pet_name,owner_name,costume,category,age,species,breed,prize});
+        const exist = await pet.findOne({userId,pet_name,owner_name,costume,category,age,species,breed,prize});
         if(exist){
             return res.status(400).send({msg:"Pet-Data already exists"});
         }
-        const petData = new pet({pet_name,owner_name,costume,category,age,species,breed,prize});
+        const petData = new pet({userId,pet_name,owner_name,costume,category,age,species,breed,prize});
         await petData.save();
         res.status(200).send({msg:"Pet-Data created successfully",petData});
     } catch (error) {
@@ -27,6 +27,22 @@ router.post('/pets',async(req,res)=>{
 router.get('/pets',async(req,res)=>{
     try {
         const pets = await pet.find();
+        
+        return res.status(200).send({msg:"Pet-Data retrieved successfully",pets});
+    } catch (error) {
+        res.status(500).send({msg:"Something went wrong",error});
+        console.log(error);
+    }
+})
+
+router.get('/:id',async(req,res)=>{
+    try {
+        const {id} = req.params;
+        if(!id){
+            return res.status(400).send({msg:"Please provide Pet-Data id"});
+
+        }
+        const pets = await pet.find({userId:id});
         
         return res.status(200).send({msg:"Pet-Data retrieved successfully",pets});
     } catch (error) {

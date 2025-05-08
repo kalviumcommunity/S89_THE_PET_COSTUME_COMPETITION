@@ -4,15 +4,17 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 
-
+const userRouter = require("./userRouter");
 
 const app = express();
 
 const cors = require("cors")
 app.use(cors());
+app.use(express.json());
 
 const costumeRouter = require("./router");
 app.use('/costume',costumeRouter);
+app.use("/user", userRouter);
 
 app.get("/ping", (req, res) => {
     try {
