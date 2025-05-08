@@ -5,6 +5,9 @@ import Costume from './components/costume';
 import Navbar from './Navbar';
 import EntityList from './components/EntityList';
 import FormPage from './components/FormPage';
+import Signup from './components/Signup';
+import Login from './components/Login';
+import UserData from './components/UserData';
 
 const AllRoutes = () => {
   const [selectedEntity, setSelectedEntity] = useState(null);
@@ -19,6 +22,9 @@ const AllRoutes = () => {
         <Route path='/costume' element={<Costume/>}/>
         <Route path='/list' element={<EntityList setSelectedEntity={setSelectedEntity} />} />
         <Route path='/addcostume' element={<FormPage selectedEntity={selectedEntity} setSelectedEntity={setSelectedEntity} refreshEntities={refreshEntities} />} />
+        <Route path='/register' element={<Signup/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/userData' element={<UserData/>}/>
     </Routes>
   );
 }

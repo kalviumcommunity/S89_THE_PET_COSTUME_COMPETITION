@@ -1,5 +1,4 @@
 import React from 'react'
-import Navbar from './Navbar'
 
 const About = () => {
 
@@ -10,8 +9,6 @@ const About = () => {
       <p style={{fontSize:"large"}}>💫Welcome to the most fun and creative contest for pet lovers..
       Upload your pet’s funniest costume and vote for the best ones!💫</p>
     
-     
-      <Navbar/>
     </div>
   )
 }

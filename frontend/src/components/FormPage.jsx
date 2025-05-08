@@ -11,6 +11,7 @@ const FormPage = ({ selectedEntity, setSelectedEntity, refreshEntities }) => {
     species: "",
     breed: "",
     prize: "",
+    userId:"",
   });
 
   useEffect(() => {
@@ -25,6 +26,11 @@ const FormPage = ({ selectedEntity, setSelectedEntity, refreshEntities }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      alert("Please log in to submit the form.");
+      return;
+    }
     try {
       if (selectedEntity) {
         await axios.put(`http://localhost:3000/costume/pets/${selectedEntity._id}`, formData);

@@ -13,6 +13,13 @@ const Navbar = () => {
     </div>
 
     <div onClick={()=>{
+        navigate("/")
+    }}>
+        <button style={{background:"black",color:"white"}}>About</button>
+
+    </div>
+
+    <div onClick={()=>{
         navigate("/list")
     }}>
         <button style={{background:"black",color:"white"}}>Entities</button>
@@ -23,6 +30,27 @@ const Navbar = () => {
         navigate("/addcostume")
     }}>
         <button style={{background:"black",color:"white"}}>Add Costume</button>
+
+    </div>
+
+    <div onClick={()=>{
+        navigate("/userData")
+    }}>
+        <button style={{background:"black",color:"white"}}>UserData</button>
+
+    </div>
+
+    <div onClick={()=>{
+        navigate("/login")
+    }}>
+        <button style={{background:"black",color:"white"}}>Login</button>
+
+    </div>
+
+    <div onClick={()=>{
+        navigate("/register")
+    }}>
+        <button style={{background:"black",color:"white"}}>Signup</button>
 
     </div>
 
