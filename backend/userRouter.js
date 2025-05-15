@@ -22,7 +22,7 @@ userRouter.post('/register', async (req, res) => {
 });
 
 userRouter.post('/login', async (req, res) => { 
-    try {
+     try {
         const { email, password } = req.body;
         if (!email || !password) {
             return res.status(400).send({ msg: "Please fill all details to login" });
@@ -31,11 +31,19 @@ userRouter.post('/login', async (req, res) => {
         if (!user) {
             return res.status(400).send({ msg: "Invalid credentials" });
         }
-        res.status(200).send({ msg: "User logged in successfully", user });
+        // Set username in cookie
+        res.cookie('username', user.name, { httpOnly: true, sameSite: 'lax',secure:'none' });
+        res.status(200).send({ msg: "User logged in successfully", user: { name: user.name, email: user.email } });
     } catch (error) {
         res.status(500).send({ msg: "Something went wrong", error });
         console.log(error);
     }
+});
+
+userRouter.post('/logout', (req, res) => {
+    // Remove the username cookie
+    res.clearCookie('username');
+    res.status(200).send({ msg: "User logged out successfully" });
 });
 
 userRouter.get('/', async (req, res) => {

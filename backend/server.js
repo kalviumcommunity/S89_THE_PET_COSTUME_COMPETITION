@@ -1,16 +1,29 @@
 const express = require("express");
+const app = express();
 
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 
+const cors = require("cors");
+
+// Replace this:
+
+// With this:
+app.use(cors({
+    origin: "http://localhost:5174", // your frontend's URL
+    credentials: true
+}));
+app.use(express.json());
+
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 const userRouter = require("./userRouter");
 
-const app = express();
 
-const cors = require("cors")
-app.use(cors());
-app.use(express.json());
+
+
 
 const costumeRouter = require("./router");
 app.use('/costume',costumeRouter);
