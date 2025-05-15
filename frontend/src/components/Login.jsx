@@ -18,12 +18,24 @@ const Login = () => {
         e.preventDefault();
         console.log(user); // Log the user object
         try {
-            const response = await axios.post("http://localhost:3000/user/login", user);
+            const response = await axios.post("http://localhost:3000/user/login", user,
+                {withCredentials:true}
+            );
             console.log(response.data);
             alert("User logged successfully");
         } catch (error) {
             console.error(error.response ? error.response.data : error.message);
             alert("Something went wrong");
+        }
+    }
+
+    async function handleLogout() {
+        try {
+            await axios.post("http://localhost:3000/user/logout", {}, { withCredentials: true });
+            alert("User logged out successfully");
+        } catch (error) {
+            console.error(error.response ? error.response.data : error.message);
+            alert("Logout failed");
         }
     }
 
@@ -35,6 +47,7 @@ const Login = () => {
             <input type="password" name="password" onChange={handleInput} placeholder='Enter Password...'/>
             <input type="submit"/>
         </form>
+        <button onClick={handleLogout} style={{ marginTop: '10px' }}>Logout</button>
       
     </div>
   )
