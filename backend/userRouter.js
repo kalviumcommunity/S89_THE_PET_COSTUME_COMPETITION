@@ -32,7 +32,7 @@ userRouter.post('/login', async (req, res) => {
             return res.status(400).send({ msg: "Invalid credentials" });
         }
         // Set username in cookie
-        res.cookie('username', user.name, { httpOnly: true, sameSite: 'strict' });
+        res.cookie('username', user.name, { httpOnly: true, sameSite: 'strict',secure:'true' });
         res.status(200).send({ msg: "User logged in successfully", user: { name: user.name, email: user.email } });
     } catch (error) {
         res.status(500).send({ msg: "Something went wrong", error });
