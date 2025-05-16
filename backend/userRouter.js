@@ -1,6 +1,9 @@
 const express = require('express'); 
 const User = require('./userSchema');
+const jwt = require('jsonwebtoken');
 const userRouter = express.Router();
+
+const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key"; // Use env in production
 
 userRouter.post('/register', async (req, res) => {
     try {
@@ -21,8 +24,9 @@ userRouter.post('/register', async (req, res) => {
     }
 });
 
+// LOGIN with JWT
 userRouter.post('/login', async (req, res) => { 
-     try {
+    try {
         const { email, password } = req.body;
         if (!email || !password) {
             return res.status(400).send({ msg: "Please fill all details to login" });
@@ -31,8 +35,19 @@ userRouter.post('/login', async (req, res) => {
         if (!user) {
             return res.status(400).send({ msg: "Invalid credentials" });
         }
-        // Set username in cookie
-        res.cookie('username', user.name, { httpOnly: true, sameSite: 'strict',secure:'true' });
+        // Create JWT token
+        const token = jwt.sign(
+            { userId: user._id, name: user.name, email: user.email },
+            JWT_SECRET,
+            { expiresIn: '1d' }
+        );
+        // Set token in httpOnly cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+            sameSite: 'strict',
+            secure: false, // set to true if using HTTPS
+            maxAge: 24 * 60 * 60 * 1000 // 1 day
+        });
         res.status(200).send({ msg: "User logged in successfully", user: { name: user.name, email: user.email } });
     } catch (error) {
         res.status(500).send({ msg: "Something went wrong", error });
@@ -40,9 +55,9 @@ userRouter.post('/login', async (req, res) => {
     }
 });
 
+// LOGOUT (clear cookie)
 userRouter.post('/logout', (req, res) => {
-    // Remove the username cookie
-    res.clearCookie('username');
+    res.clearCookie('token');
     res.status(200).send({ msg: "User logged out successfully" });
 });
 
