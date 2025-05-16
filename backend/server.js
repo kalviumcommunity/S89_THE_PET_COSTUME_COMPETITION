@@ -11,7 +11,7 @@ const cors = require("cors");
 
 // With this:
 app.use(cors({
-    origin: "http://localhost:5174", // your frontend's URL
+    origin: "http://localhost:5176", // your frontend's URL
     credentials: true
 }));
 app.use(express.json());
